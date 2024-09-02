@@ -35,27 +35,30 @@ if(isset($_POST['add'])){
         <title>Přidání nové knihy</title>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Knihy</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.php">Seznam všech knih</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="searchBooks.php">Vyhledávání knih</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="add.php">Přidání nové knihy</a>
-                        </li>
-                    </ul>
-                </div>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.php">Knihošpajzka</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php">O webu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="listBooks.php">Seznam všech knih</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="searchBooks.php">Vyhledávání knih</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="add.php">Přidání nové knihy</a>
+                    </li>
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
         <div class="container">
             <h2 class="h2">Přidání nové knihy</h2>
             <form action="add.php" method="post">
