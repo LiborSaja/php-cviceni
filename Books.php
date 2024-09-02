@@ -15,6 +15,15 @@ class Books {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // Metoda pro získání počtu knih v databázi
+    public function getBookCount() {
+        $sql = 'SELECT COUNT(*) as count FROM books';
+        $stmt = $this->dbConn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['count'];
+    }
+
     //metoda hledající auta na základě zadaných parametrů
     public function filterBooks($p_jmeno, $p_prijmeni, $p_nazev_knihy, $p_isbn){
         $sql = 'SELECT * FROM books WHERE 1=1';
@@ -72,6 +81,12 @@ class Books {
 
     //funkce pro přidání nové knihy
     public function addBook($p_jmeno, $p_prijmeni, $p_nazev_knihy, $p_popis_knihy, $p_isbn){
+        // Kontrola počtu knih v databázi
+        $bookCount = $this->getBookCount();
+        if ($bookCount >= 100) {
+            return false; // Pokud je více než 100 knih, zabráníme přidání nové knihy
+        }
+
         $sql = 'INSERT INTO books (jmeno, prijmeni, nazev_knihy, popis_knihy, isbn) VALUES (:jmeno, :prijmeni, :nazev_knihy, :popis_knihy, :isbn)';
         $stmt = $this->dbConn->prepare($sql);
         $stmt->bindParam(':jmeno', $p_jmeno, PDO::PARAM_STR);

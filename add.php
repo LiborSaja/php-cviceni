@@ -11,19 +11,24 @@ $dbConnection = $conn->connect();
 //tvorba instance Cars, jako parametr konstruktoru předáme připojení do db
 $instanceBooks = new Books($dbConnection);
 
+$limit = '';
+
 //hlídání zda je v globálním poli klíč add - pokud ano, zavolá se metoda addCar
-if(isset($_POST['add'])){
-    $bookId = $_POST['id'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $jmeno = $_POST['jmeno'];
     $prijmeni = $_POST['prijmeni'];
     $nazev_knihy = $_POST['nazev_knihy'];
     $popis_knihy = $_POST['popis_knihy'];
     $isbn = $_POST['isbn'];
-    $instanceBooks->addBook($jmeno, $prijmeni, $nazev_knihy, $popis_knihy, $isbn);
-    header("Location: index.php");
-    exit();
-}
 
+    $result = $instanceBooks->addBook($jmeno, $prijmeni, $nazev_knihy, $popis_knihy, $isbn);
+
+    if ($result) {
+        $limit = "Kniha byla úspěšně přidána.";
+    } else {
+        $limit = "Nelze přidat novou knihu. Byl dosažen limit 100 knih. Pro přidání dalších nejdříve některé odstraňte.";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -61,8 +66,8 @@ if(isset($_POST['add'])){
     </nav>
         <div class="container">
             <h2 class="h2">Přidání nové knihy</h2>
-            <form action="add.php" method="post">
-                
+            <p class="text-danger"><?= $limit ?></p>
+            <form action="add.php" method="post">           
                 <input type="text" name="jmeno" value="" class="form-control my-2" required placeholder="Zadejte jméno autora">
                 <input type="text" name="prijmeni" value="" class="form-control my-2" required placeholder="Zadejte příjmení autora">
                 <input type="text" name="nazev_knihy" value="" class="form-control my-2" required placeholder="Zadejte název knihy">

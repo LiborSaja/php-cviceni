@@ -7,6 +7,7 @@ $dbConnection = $conn->connect();
 
 $instanceBooks = new Books($dbConnection);
 $books = $instanceBooks->getBooks();
+$bookCount = $instanceBooks->getBookCount(); // Získání počtu knih
 
 if(isset($_GET['delete'])){
     $bookId = $_GET['delete'];
@@ -51,6 +52,7 @@ if(isset($_GET['delete'])){
     </nav>
     <div class="container">
         <h2>Seznam všech knih</h2>
+        <p>Celkový počet knih v databázi: <?= $bookCount ?></p>
         <table class="table">
             <tr>
                 <th>ID</th>
