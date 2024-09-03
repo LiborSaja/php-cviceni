@@ -53,15 +53,36 @@ if(isset($_GET['jmeno']) || isset($_GET['prijmeni']) || isset($_GET['nazev_knihy
     </nav>
     <div class="container">
         <h2>Vyhledávání</h2>
-        <form action="searchBooks.php" method="get">
-            <input type="text" name="jmeno" class="form-control my-2" placeholder="Vyhladání dle jména autora">
-            <input type="text" name="prijmeni" class="form-control my-2" placeholder="Vyhladání dle příjmení autora">
-            <input type="text" name="nazev_knihy" class="form-control my-2" placeholder="Vyhledání dle názvu knihy">
-            <input type="text" name="isbn" class="form-control my-2" placeholder="Vyhledání dle ISBN">
-            <input class="btn btn-primary" type="submit" value="Vyhledat">
-        </form>
+        <form action="searchBooks.php" method="get" class="p-4 rounded shadow bg-light">
+    <div class="row g-3 mb-3">
+        <div class="col-md-6">
+            <label for="jmeno" class="form-label">Jméno autora</label>
+            <input type="text" id="jmeno" name="jmeno" class="form-control" placeholder="Vyhladání dle jména autora">
+        </div>
+        <div class="col-md-6">
+            <label for="prijmeni" class="form-label">Příjmení autora</label>
+            <input type="text" id="prijmeni" name="prijmeni" class="form-control" placeholder="Vyhladání dle příjmení autora">
+        </div>
+    </div>
+    <div class="row g-3 mb-3">
+        <div class="col-md-6">
+            <label for="nazev_knihy" class="form-label">Název knihy</label>
+            <input type="text" id="nazev_knihy" name="nazev_knihy" class="form-control" placeholder="Vyhledání dle názvu knihy">
+        </div>
+        <div class="col-md-6">
+            <label for="isbn" class="form-label">ISBN</label>
+            <input type="text" id="isbn" name="isbn" class="form-control" placeholder="Vyhledání dle ISBN">
+        </div>
+    </div>
+    <div class="text-end">
+        <input class="btn btn-primary btn-lg" type="submit" value="Vyhledat">
+    </div>
+</form>
+
         <?php if(!empty($selectedBooks)): ?>
-        <table class="table mt-4">
+            <div class="table-responsive mt-4">
+    <table class="table table-bordered table-striped">
+        <thead class="table-primary">
             <tr>
                 <th>ID</th>
                 <th>Jméno autora</th>
@@ -70,6 +91,8 @@ if(isset($_GET['jmeno']) || isset($_GET['prijmeni']) || isset($_GET['nazev_knihy
                 <th>Popis knihy</th>
                 <th>ISBN</th>
             </tr>
+        </thead>
+        <tbody>
             <?php foreach ($selectedBooks as $book): ?>
             <tr>
                 <td><?php echo $book['id'] ?></td>
@@ -80,7 +103,10 @@ if(isset($_GET['jmeno']) || isset($_GET['prijmeni']) || isset($_GET['nazev_knihy
                 <td><?php echo $book['isbn'] ?></td>
             </tr>
             <?php endforeach ?>
-        </table>
+        </tbody>
+    </table>
+</div>
+
         <?php endif ?>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

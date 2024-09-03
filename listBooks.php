@@ -53,7 +53,9 @@ if(isset($_GET['delete'])){
     <div class="container">
         <h2>Seznam všech knih</h2>
         <p>Celkový počet knih v databázi: <?= $bookCount ?></p>
-        <table class="table">
+        <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead class="table-primary">
             <tr>
                 <th>ID</th>
                 <th>Jméno autora</th>
@@ -63,6 +65,8 @@ if(isset($_GET['delete'])){
                 <th>ISBN</th>
                 <th colspan="2">Akce</th>
             </tr>
+        </thead>
+        <tbody>
             <?php foreach ($books as $book): ?>
             <tr>
                 <td><?php echo $book['id'] ?></td>
@@ -72,11 +76,14 @@ if(isset($_GET['delete'])){
                 <td><?php echo $book['popis_knihy'] ?></td>
                 <td><?php echo $book['isbn'] ?></td>
                 <td>
-                    <a class="btn btn-warning" href="listBooks.php?delete=<?php echo $book['id'] ?>">Odstranit</a>
+                    <a class="btn btn-warning btn-sm" href="listBooks.php?delete=<?php echo $book['id'] ?>">Odstranit</a>
                 </td>
             </tr>
             <?php endforeach ?>
-        </table>
+        </tbody>
+    </table>
+</div>
+
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

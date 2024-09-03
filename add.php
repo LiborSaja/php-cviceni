@@ -66,15 +66,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </nav>
         <div class="container">
             <h2 class="h2">Přidání nové knihy</h2>
-            <p class="text-danger"><?= $limit ?></p>
-            <form action="add.php" method="post">           
-                <input type="text" name="jmeno" value="" class="form-control my-2" required placeholder="Zadejte jméno autora">
-                <input type="text" name="prijmeni" value="" class="form-control my-2" required placeholder="Zadejte příjmení autora">
-                <input type="text" name="nazev_knihy" value="" class="form-control my-2" required placeholder="Zadejte název knihy">
-                <input type="text" name="popis_knihy" value="" class="form-control my-2" required placeholder="Krátký popis knihy">
-                <input type="text" name="isbn" value="" class="form-control my-2" required placeholder="Zadejte ISBN knihy">
-                <input type="submit" value="Přidat" class="btn btn-primary my-2" name="add">
-            </form>        
+            <form action="add.php" method="post" class="p-4 rounded shadow bg-light">
+    <div class="row g-3 mb-3">
+        <div class="col-md-6">
+            <label for="jmeno" class="form-label">Jméno autora</label>
+            <input type="text" id="jmeno" name="jmeno" class="form-control" required placeholder="Zadejte jméno autora">
+        </div>
+        <div class="col-md-6">
+            <label for="prijmeni" class="form-label">Příjmení autora</label>
+            <input type="text" id="prijmeni" name="prijmeni" class="form-control" required placeholder="Zadejte příjmení autora">
+        </div>
+    </div>
+    <div class="row g-3 mb-3">
+        <div class="col-md-6">
+            <label for="nazev_knihy" class="form-label">Název knihy</label>
+            <input type="text" id="nazev_knihy" name="nazev_knihy" class="form-control" required placeholder="Zadejte název knihy">
+        </div>
+        <div class="col-md-6">
+            <label for="isbn" class="form-label">ISBN</label>
+            <input type="text" id="isbn" name="isbn" class="form-control" required placeholder="Zadejte ISBN knihy">
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="popis_knihy" class="form-label">Popis knihy</label>
+        <textarea id="popis_knihy" name="popis_knihy" class="form-control" required placeholder="Krátký popis knihy" rows="4"></textarea>
+    </div>
+    <div class="text-end">
+        <input type="submit" value="Přidat" class="btn btn-primary btn-lg" name="add">
+        <p class="text-danger my-2"><?= $limit ?></p>
+    </div>
+</form>
+       
         </div>
 
 

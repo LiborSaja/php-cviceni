@@ -24,12 +24,12 @@ class Books {
         return $result['count'];
     }
 
-    //metoda hledající auta na základě zadaných parametrů
+    //metoda hledající knihy na základě zadaných parametrů
     public function filterBooks($p_jmeno, $p_prijmeni, $p_nazev_knihy, $p_isbn){
         $sql = 'SELECT * FROM books WHERE 1=1';
         $params = [];
 
-        //přidání podmínek do dotazu podle paarametrů
+        //přidání podmínek do dotazu podle parametrů
         if (!empty($p_jmeno)){
             $sql .= " AND jmeno LIKE :jmeno";
             $params[':jmeno'] = '%' . $p_jmeno . '%';
@@ -62,7 +62,7 @@ class Books {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    //mazání auta
+    //mazání knih
     public function deleteBook($p_id){
         $sql = 'DELETE FROM books WHERE id = :id';
         $stmt = $this->dbConn->prepare($sql);
@@ -70,7 +70,7 @@ class Books {
         return $stmt->execute();
     }
 
-    //vrácení konkrétního auta
+    //vrácení konkrétní knihy
     public function getBook($p_id){
         $sql = 'SELECT * FROM books WHERE id = :id';
         $stmt = $this->dbConn->prepare($sql);
