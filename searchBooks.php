@@ -7,7 +7,10 @@ $dbConnection = $conn->connect();
 
 $instanceBooks = new Books($dbConnection);
 
-if(isset($_GET['jmeno']) || isset($_GET['prijmeni']) || isset($_GET['nazev_knihy']) || isset($_GET['isbn'])){
+if((isset($_GET['jmeno']) && $_GET['jmeno'] !== '') || 
+(isset($_GET['prijmeni']) && $_GET['prijmeni'] !== '') || 
+(isset($_GET['nazev_knihy']) && $_GET['nazev_knihy'] !== '') || 
+(isset($_GET['isbn']) && $_GET['isbn'] !== '')){
     $selectedJmeno = $_GET['jmeno'];
     $selectedPrijmeni = $_GET['prijmeni'];
     $selectedNazev = $_GET['nazev_knihy'];

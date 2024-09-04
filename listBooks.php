@@ -9,12 +9,6 @@ $instanceBooks = new Books($dbConnection);
 $books = $instanceBooks->getBooks();
 $bookCount = $instanceBooks->getBookCount(); // Získání počtu knih
 
-if(isset($_GET['delete'])){
-    $bookId = $_GET['delete'];
-    $instanceBooks->deleteBook($bookId);
-    header("Location: listBooks.php");
-    exit();
-}
 ?>
 
 <!DOCTYPE html>
@@ -63,7 +57,6 @@ if(isset($_GET['delete'])){
                 <th>Název knihy</th>
                 <th>Popis knihy</th>
                 <th>ISBN</th>
-                <th colspan="2">Akce</th>
             </tr>
         </thead>
         <tbody>
@@ -75,9 +68,6 @@ if(isset($_GET['delete'])){
                 <td><?php echo $book['nazev_knihy'] ?></td>
                 <td><?php echo $book['popis_knihy'] ?></td>
                 <td><?php echo $book['isbn'] ?></td>
-                <td>
-                    <a class="btn btn-warning btn-sm" href="listBooks.php?delete=<?php echo $book['id'] ?>">Odstranit</a>
-                </td>
             </tr>
             <?php endforeach ?>
         </tbody>

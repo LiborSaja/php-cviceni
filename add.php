@@ -25,9 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($result) {
         $limit = "Kniha byla úspěšně přidána.";
-    } else {
-        $limit = "Nelze přidat novou knihu. Byl dosažen limit 100 knih. Pro přidání dalších nejdříve některé odstraňte.";
-    }
+    } 
 }
 ?>
 
