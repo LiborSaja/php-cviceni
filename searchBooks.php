@@ -7,17 +7,33 @@ $dbConnection = $conn->connect();
 
 $instanceBooks = new Books($dbConnection);
 
-if((isset($_GET['jmeno']) && $_GET['jmeno'] !== '') || 
-(isset($_GET['prijmeni']) && $_GET['prijmeni'] !== '') || 
-(isset($_GET['nazev_knihy']) && $_GET['nazev_knihy'] !== '') || 
-(isset($_GET['isbn']) && $_GET['isbn'] !== '')){
-    $selectedJmeno = $_GET['jmeno'];
-    $selectedPrijmeni = $_GET['prijmeni'];
-    $selectedNazev = $_GET['nazev_knihy'];
-    $selectedIsbn = $_GET['isbn'];
-    $selectedBooks = $instanceBooks->filterBooks($selectedJmeno, $selectedPrijmeni, $selectedNazev, $selectedIsbn);
-} else {
-    $selectedBooks = [];
+$error = '';
+$selectedBooks = []; // Inicializace prázdného pole pro výsledky knih
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && !empty($_GET)) {
+    // Kontrola, zda byl alespoň jeden z parametrů zadán
+    if (
+        (isset($_GET['jmeno']) && $_GET['jmeno'] !== '') || 
+        (isset($_GET['prijmeni']) && $_GET['prijmeni'] !== '') || 
+        (isset($_GET['nazev_knihy']) && $_GET['nazev_knihy'] !== '') || 
+        (isset($_GET['isbn']) && $_GET['isbn'] !== '')
+    ) {
+        $selectedJmeno = $_GET['jmeno'];
+        $selectedPrijmeni = $_GET['prijmeni'];
+        $selectedNazev = $_GET['nazev_knihy'];
+        $selectedIsbn = $_GET['isbn'];
+
+        // Výsledky vyhledávání
+        $selectedBooks = $instanceBooks->filterBooks($selectedJmeno, $selectedPrijmeni, $selectedNazev, $selectedIsbn);
+        
+        // Pokud není nalezena žádná kniha
+        if (empty($selectedBooks)) {
+            $error = 'Kniha nenalezena. Opakujte vyhledávání.';
+        }
+    } else {
+        // Pokud nebylo zadáno žádné vyhledávací kritérium
+        $error = 'Prosím, zadejte alespoň jedno vyhledávací kritérium.';
+    }
 }
 ?>
 
@@ -77,6 +93,9 @@ if((isset($_GET['jmeno']) && $_GET['jmeno'] !== '') ||
             <input type="text" id="isbn" name="isbn" class="form-control" placeholder="Vyhledání dle ISBN">
         </div>
     </div>
+    <?php if (!empty($error)): ?>
+        <p class="text-danger"><?= $error ?></p>
+    <?php endif; ?>
     <div class="text-end">
         <input class="btn btn-primary btn-lg" type="submit" value="Vyhledat">
     </div>
